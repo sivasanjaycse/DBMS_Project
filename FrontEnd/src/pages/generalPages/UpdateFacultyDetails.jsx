@@ -4,11 +4,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import './UpdateFacultyDetails.css'; 
 import Navbar from "./Navbar";
 function UpdateFacultyDetails() {
-  const { id } = useParams(); // faculty_id from URL
+  const { facultyId } = useParams(); // faculty_id from URL
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    faculty_id: id,
+    faculty_id: facultyId,
     name: "",
     phone: "",
     email: "",
@@ -19,14 +19,14 @@ function UpdateFacultyDetails() {
 
   // Load existing details first
   useEffect(() => {
-    axios.get(`http://localhost:3000/faculty/${id}`)
+    axios.get(`http://localhost:3000/faculty/${facultyId}`)
       .then((res) => {
         setFormData(res.data[0]);
       })
       .catch((err) => {
         console.error("Error fetching faculty details", err);
       });
-  }, [id]);
+  }, [facultyId]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -41,7 +41,7 @@ function UpdateFacultyDetails() {
       const res = await axios.post("http://localhost:3000/update-faculty", formData);
       if (res.data.success) {
         alert("Updated successfully!");
-        navigate(`/dashboard/${id}`);
+        navigate(`/dashboard/${facultyId}`);
       } else {
         alert(res.data.message);
       }

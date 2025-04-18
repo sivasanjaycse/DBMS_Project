@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const FDPRegister = () => {
+const FDPDetails = () => {
   const { facultyId, fdpId } = useParams();
   const navigate = useNavigate();
   const [fdpDetails, setFdpDetails] = useState(null);
@@ -33,29 +33,7 @@ console.log('fdpId:', fdpId); // Should NOT be undefined!
   }, [fdpId]);
 
   const handleRegister = async () => {
-    const confirmRegister = window.confirm('Are you sure you want to register for this FDP?');
-    if (!confirmRegister) return;
-
-    try {
-      const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-      const response = await axios.post('http://localhost:3000/register', {
-        faculty_id: parseInt(facultyId),
-        fdp_id: parseInt(fdpId),
-        payment_status: 'success',
-        date: currentDate,
-      });
-
-      if (response.data.success) {
-        alert('Registration successful!');
-        navigate(`/fdp-list/${facultyId}`);
-      } else {
-        alert('Registration failed.');
-      }
-    } catch (error) {
-      console.error('Error during registration:', error);
-      alert('You may have already registered for this FDP.');
-      navigate(`/fdp-list/${facultyId}`);
-    }
+      navigate(`/fdp/registered/${facultyId}`);
   };
 
   if (loading) {
@@ -108,7 +86,7 @@ console.log('fdpId:', fdpId); // Should NOT be undefined!
         </tbody>
       </table>
       <br />
-      <button className='blue-button' onClick={handleRegister}>Register</button><br/><br/>
+      <button className='blue-button' onClick={handleRegister}>Back</button><br/><br/>
       <a href={`/fdp/session/${facultyId}/${fdpId}`}>
       <button className='blue-button'>More Details</button></a>
     </div>
@@ -117,4 +95,4 @@ console.log('fdpId:', fdpId); // Should NOT be undefined!
   );
 };
 
-export default FDPRegister;
+export default FDPDetails;

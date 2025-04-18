@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import Navbar from '../generalPages/Navbar';
+import './fdp-list-register.css';
 
 const FdpList = () => {
   const [fdps, setFdps] = useState([]);
@@ -24,12 +26,15 @@ const FdpList = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Upcoming FDP Programs</h2>
+    <>
+    <Navbar/>
+    <div className='page'>
+    <div className='container' id='fdp-list-container'>
+      <h2 className='blackText'>Upcoming FDP Programs</h2>
       {fdps.length === 0 ? (
         <p>No upcoming FDPs...</p>
       ) : (
-        <table border="1" cellPadding="10" style={{ width: '100%', marginTop: '20px' }}>
+        <table className='fdp-list'>
           <thead>
             <tr>
               <th>FDP ID</th>
@@ -57,7 +62,7 @@ const FdpList = () => {
                 <td>{fdp.organizer_name}</td>
                 <td>{fdp.organizer_phone}</td>
                 <td>
-                  <button onClick={() => handleRegister(fdp.fdp_id)}>Register</button>
+                  <button className='blue-button' onClick={() => handleRegister(fdp.fdp_id)}>Register</button>
                 </td>
               </tr>
             ))}
@@ -65,6 +70,8 @@ const FdpList = () => {
         </table>
       )}
     </div>
+    </div>
+    </>
   );
 };
 

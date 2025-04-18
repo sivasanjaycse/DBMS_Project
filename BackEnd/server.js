@@ -186,3 +186,48 @@ app.get('/all-fdp', async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch FDP details' });
   }
 });
+
+app.get('/fdp/:id/sessions', async (req, res) => {
+  const fdpId = parseInt(req.params.id);
+
+  try {
+    const result = await sql`
+      SELECT 
+        s.topic,
+        s.mode,
+        s.duration,
+        s.date AS session_date,
+        s.time AS session_time,
+        f.name AS faculty_name
+      FROM session s
+      JOIN faculty f ON s.handling_fac_id = f.faculty_id
+      WHERE s.fdp_id = ${fdpId}
+    `;
+
+    res.json({ success: true, sessions: result });
+  } catch (error) {
+    console.error('Error fetching session details:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/faculty/:id/registered-fdps', async (req, res) => {
+  const facultyId = parseInt(req.params.id);
+
+  try {
+    const result = await sql`
+      SELECT 
+        fdp.fdp_id,
+        fdp.title AS fdp_title,
+        reg.payment_status
+      FROM registration reg
+      JOIN fdp_program fdp ON reg.fdp_id = fdp.fdp_id
+      WHERE reg.faculty_id = ${facultyId}
+    `;
+
+    res.json({ success: true, fdps: result });
+  } catch (error) {
+    console.error('Error retrieving registered FDPs:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});

@@ -4,17 +4,17 @@ import { useParams } from "react-router-dom";
 import "./Navbar.css"; // Import the CSS
 
 const Navbar = () => {
-  const { id } = useParams();
+  const { facultyId,} = useParams();
   return (
     <nav className="navbar">
-      <NavLink to={"/dashboard/" + id} className="nav-item">
+      <NavLink to={"/dashboard/" + facultyId} className="nav-item">
         Dashboard
       </NavLink>
-      <NavLink to={"/fdp-list/"+id} className="nav-item">
-        Regiter FDP
+      <NavLink to={"/fdp-list/"+facultyId} className="nav-item">
+        Upcoming Programs
       </NavLink>
-      <NavLink to="/" className="nav-item">
-        Feature
+      <NavLink to={"/fdp/registered/"+facultyId} className="nav-item">
+        Registered Programs
       </NavLink>
       <NavLink to="/" className="nav-item">
         Feature

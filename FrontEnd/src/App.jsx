@@ -9,6 +9,9 @@ import UpdateFacultyDetails from "./pages/generalPages/UpdateFacultyDetails";
 import FacultyRegister from "./pages/generalPages/FacultyRegister";
 import FDPRegister from "./pages/fdpPages/FDPRegister";
 import FdpList from "./pages/fdpPages/FDPList";
+import SessionList from './pages/fdpPages/SessionList'; 
+import RegisteredPrograms from './pages/fdpPages/RegisteredPrograms';
+import FDPDetails from './pages/fdpPages/FDPDetails';
 function App() {
   return (
     <>
@@ -16,11 +19,17 @@ function App() {
          <Header /> 
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard/:id" element={<FacultyDashboardWrapper />} />\
-          <Route path="/update/:id" element={<UpdateFacultyDetails />} />
+          <Route path="/dashboard/:facultyId" element={<FacultyDashboardWrapper />} />
+          <Route path="/update/:facultyId" element={<UpdateFacultyDetails />} />
           <Route path="/register" element={<FacultyRegister />} />
           <Route path="/fdp-list/:facultyId" element={<FdpList />} />
-          <Route path="/fdp/register/:facultyId/:fdpId" element={<FDPRegister />} />
+          <Route path="/fdp/register/:facultyId/:fdpId" element={<FDPRegister />} />   
+          <Route path="/fdp/details/:facultyId/:fdpId" element={<FDPDetails />} />  
+<Route path="/fdp/session/:facultyId/:fdpId" element={<SessionList />} />
+
+
+<Route path="/fdp/registered/:facultyId" element={<RegisteredPrograms />} />
+
         </Routes>
       </Router>
       <Footer />

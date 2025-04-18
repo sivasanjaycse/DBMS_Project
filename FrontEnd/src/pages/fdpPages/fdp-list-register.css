@@ -1,0 +1,47 @@
+.fdp-list {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f9fc; /* Light blue background */
+  }
+  
+  .fdp-list thead {
+    background-color: #007bff; /* Blue header */
+    color: white;
+  }
+  
+  .fdp-list th,
+  .fdp-list td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #d9eaff;
+    font-size: 0.95rem;
+  }
+  
+  .fdp-list th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .fdp-list td {
+    color: #333;
+  }
+  
+#fdp-list-container{
+ width:95%   
+}
+#fdp-register-container{
+    width:55%   ;
+    margin-top: 9rem;
+}
+#session-list-container{
+  width:55%   ;
+  margin-top: 7rem;
+}
+#reg-prgm-container{
+    width:55%   ;
+}
