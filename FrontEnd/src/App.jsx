@@ -1,4 +1,4 @@
-import { useState } from "react";
+// File: App.jsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "/src/pages/generalPages/LoginPage.jsx";
 import "./App.css";
@@ -12,6 +12,12 @@ import FdpList from "./pages/fdpPages/FDPList";
 import SessionList from './pages/fdpPages/SessionList'; 
 import RegisteredPrograms from './pages/fdpPages/RegisteredPrograms';
 import FDPDetails from './pages/fdpPages/FDPDetails';
+import OngoingPrograms from './pages/fdpPages/OngoingPrograms';
+import CompletedPrograms from './pages/fdpPages/CompletedPrograms';
+
+
+<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />
+
 function App() {
   return (
     <>
@@ -26,9 +32,11 @@ function App() {
           <Route path="/fdp/register/:facultyId/:fdpId" element={<FDPRegister />} />   
           <Route path="/fdp/details/:facultyId/:fdpId" element={<FDPDetails />} />  
 <Route path="/fdp/session/:facultyId/:fdpId" element={<SessionList />} />
-
-
+<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />
 <Route path="/fdp/registered/:facultyId" element={<RegisteredPrograms />} />
+
+<Route path="/fdp/completed/:facultyId" element={<CompletedPrograms />} />
+
 
         </Routes>
       </Router>

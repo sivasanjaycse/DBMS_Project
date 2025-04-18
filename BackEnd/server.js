@@ -231,3 +231,43 @@ app.get('/faculty/:id/registered-fdps', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+app.get('/fdp/ongoing/:facultyId', async (req, res) => {
+  const { facultyId } = req.params;
+
+  try {
+    const result = await sql`
+      SELECT f.title, f.fdp_id as fdp_id
+      FROM participation p
+      JOIN fdp_program f ON p.fdp_id = f.fdp_id
+      WHERE p.faculty_id = ${facultyId}
+        AND f.end_date >= CURRENT_DATE
+    `;
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error('Error fetching ongoing FDPs:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+app.get('/fdp/completed/:facultyId', async (req, res) => {
+  const { facultyId } = req.params;
+
+  try {
+    const result = await sql`
+      SELECT f.title AS fdp_title, fac.name AS faculty_name
+      FROM participation p
+      JOIN fdp_program f ON p.fdp_id = f.fdp_id
+      JOIN faculty fac ON p.faculty_id = fac.faculty_id
+      WHERE p.faculty_id = ${facultyId}
+        AND f.end_date < CURRENT_DATE
+    `;
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error('Error fetching completed FDPs:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+

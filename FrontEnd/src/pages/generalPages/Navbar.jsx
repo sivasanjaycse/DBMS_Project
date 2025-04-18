@@ -16,11 +16,11 @@ const Navbar = () => {
       <NavLink to={"/fdp/registered/"+facultyId} className="nav-item">
         Registered Programs
       </NavLink>
-      <NavLink to="/" className="nav-item">
-        Feature
+      <NavLink to={"/fdp/ongoing/"+facultyId} className="nav-item">
+        Ongoing Programs
       </NavLink>
-      <NavLink to="/" className="nav-item">
-        Feature
+      <NavLink to={"/fdp/completed/"+facultyId} className="nav-item">
+        Completed Programs
       </NavLink>
       <NavLink to="/" className="nav-item">
         Feature
