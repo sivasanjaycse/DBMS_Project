@@ -1,0 +1,81 @@
+/* src/components/Header.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap");
+
+.header {
+  position: fixed;
+  background: rgba(245, 245, 245, 1);
+  padding: 1.2rem 2rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px); /* Glass effect */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 1.8px;
+  line-height: 1.3;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+/* Subtle Hover Effect */
+.title:hover {
+  transform: translateY(-2px);
+}
+
+/* Animated Underline Effect */
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(51, 51, 51, 1),
+    transparent
+  );
+  border-radius: 2px;
+  transition: width 0.3s ease-in-out;
+}
+
+.title:hover::after {
+  width: 60%;
+}
+
+.footer {
+  background: rgb(51, 51, 51);
+  color: rgba(245, 245, 245, 0.95);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.extro {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}

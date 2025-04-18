@@ -1,42 +1,62 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.footer {
+  position: static;
+  bottom: 0;
+  width: 100%;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Force hiding extra width */
+}
+/* Professional Textbox Style */
+.pro-textbox {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  margin-bottom: 5%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pro-textbox:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  background-color: #fff;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.blue-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.blue-button:hover {
+  background-color: #0056d2;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
-.card {
-  padding: 2em;
+.blue-button:active {
+  background-color: #0043a7;
 }
 
-.read-the-docs {
-  color: #888;
+.warn-message {
+  color: red;
 }

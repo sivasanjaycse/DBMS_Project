@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-
+import "./LoginPage.css";
+import Navbar from "./Navbar";
 export default function LoginPage() {
   const [facultyId, setFacultyId] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +21,7 @@ export default function LoginPage() {
       if (res.data.success) {
         // Redirect or store token here
         console.log("Logged in successfully!");
-      }
-      else{
+      } else {
         console.log("Invalid Credentials");
       }
     } catch (error) {
@@ -31,42 +31,39 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-6 rounded-2xl shadow-md w-80 space-y-4"
-      >
-        <h2 className="text-xl font-bold text-center">FDP Login</h2>
+    <>
+      <Navbar />
+      <div className="login-page">
+        <div className="login-container">
+          <form onSubmit={handleLogin}>
+            <h2>FDP LOGIN</h2>
 
-        <input
-          type="text"
-          placeholder="Faculty ID"
-          value={facultyId}
-          onChange={(e) => setFacultyId(e.target.value)}
-          className="w-full border p-2 rounded"
-          required
-        />
+            <input
+              type="text"
+              placeholder="Faculty ID"
+              value={facultyId}
+              className="pro-textbox"
+              onChange={(e) => setFacultyId(e.target.value)}
+              required
+            />
+            <br />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              className="pro-textbox"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border p-2 rounded"
-          required
-        />
+            <button type="submit" className="blue-button">
+              Login
+            </button>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Login
-        </button>
-
-        {message && (
-          <p className="text-center text-sm text-gray-700">{message}</p>
-        )}
-      </form>
-    </div>
+            {message && <p className="warn-message">{message}</p>}
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
