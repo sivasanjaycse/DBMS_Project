@@ -60,9 +60,12 @@ export default function LoginPage() {
             <button type="submit" className="blue-button">
               Login
             </button>
-
             {message && <p className="warn-message">{message}</p>}
           </form>
+          <br/><br/>
+          <a href="/register" className="register-link">
+            Don't have an account? Register here
+            </a>
         </div>
       </div>
     </>

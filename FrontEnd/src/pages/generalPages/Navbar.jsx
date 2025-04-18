@@ -10,8 +10,8 @@ const Navbar = () => {
       <NavLink to={"/dashboard/" + id} className="nav-item">
         Dashboard
       </NavLink>
-      <NavLink to="/" className="nav-item">
-        Feature
+      <NavLink to={"/fdp-list/"+id} className="nav-item">
+        Regiter FDP
       </NavLink>
       <NavLink to="/" className="nav-item">
         Feature
