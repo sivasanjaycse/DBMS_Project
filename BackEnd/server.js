@@ -1,8 +1,7 @@
-const express = require('express');
-const postgres = require('postgres');
-const sql = require('./dbconnect');
-const cors = require('cors');
-
+const express = require("express");
+const postgres = require("postgres");
+const sql = require("./dbconnect");
+const cors = require("cors");
 
 const app = express();
 const PORT = 3000;
@@ -12,7 +11,7 @@ app.use(express.json());
 app.use(cors()); // This allows your frontend to talk to the backend
 
 // Route to authenticate user
-app.post('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
   const { faculty_id, password } = req.body;
 
   try {
@@ -21,14 +20,27 @@ app.post('/login', async (req, res) => {
     `;
 
     if (result[0].auth_result === 1) {
-      res.status(200).json({ success: true, message: 'Login successful' });
-    }else {
-      res.status(200).json({ success: false, message: 'Invalid credentials' });
+      res.status(200).json({ success: true, message: "Login successful" });
+    } else {
+      res.status(200).json({ success: false, message: "Invalid credentials" });
     }
-
   } catch (error) {
-    console.error('Authentication failed:', error);
-    res.status(500).json({ success: false, message: 'Database Server error' });
+    console.error("Authentication failed:", error);
+    res.status(500).json({ success: false, message: "Database Server error" });
+  }
+});
+
+app.get("/faculty/:id", async (req, res) => {
+  const facId = parseInt(req.params.id);
+  console.log(facId);
+  try {
+    const result = await sql`
+      SELECT * FROM get_faculty_details(${facId})
+    `;
+    res.json(result);
+  } catch (err) {
+    console.error("Error fetching faculty:", err);
+    res.status(500).send("Internal server error");
   }
 });
 

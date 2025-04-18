@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import "./LoginPage.css";
-import Navbar from "./Navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 export default function LoginPage() {
   const [facultyId, setFacultyId] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ export default function LoginPage() {
       setMessage(res.data.message);
 
       if (res.data.success) {
-        // Redirect or store token here
+        window.location.href = `/dashboard/${facultyId}`;
         console.log("Logged in successfully!");
       } else {
         console.log("Invalid Credentials");
@@ -32,12 +33,11 @@ export default function LoginPage() {
 
   return (
     <>
-      <Navbar />
       <div className="login-page">
         <div className="login-container">
           <form onSubmit={handleLogin}>
             <h2>FDP LOGIN</h2>
-
+            <FontAwesomeIcon icon={faUser} className="icon" />
             <input
               type="text"
               placeholder="Faculty ID"
@@ -47,6 +47,7 @@ export default function LoginPage() {
               required
             />
             <br />
+            <FontAwesomeIcon icon={faLock} className="icon" />
             <input
               type="password"
               placeholder="Password"
