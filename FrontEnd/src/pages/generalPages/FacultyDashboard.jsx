@@ -4,10 +4,12 @@ import Navbar from "./Navbar";
 import "./FacultyDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGraduate } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
 export default function FacultyDashboard({ facultyId }) {
   const [faculty, setFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
@@ -60,6 +62,9 @@ export default function FacultyDashboard({ facultyId }) {
               </tr>
             </tbody>
           </table>
+          <button className="blue-button" onClick={() => navigate(`/update/${facultyId}`)}>
+  Change My Details
+</button>
         </div>
       </div>
     </>

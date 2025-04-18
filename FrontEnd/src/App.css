@@ -107,11 +107,17 @@ body {
 
 .icon:hover {
   transform: scale(1.1); /* Icon grows on hover */
-  color: #ff5722; /* Changes to a bright color on hover */
+  color: #007acc; /* Changes to a bright color on hover */
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
-  cursor: pointer; /* Pointer cursor */
 }
 
 .icon:active {
   transform: scale(0.95); /* Slight shrink effect when clicked */
+}
+.blackText {
+  color: #000; /* Black text color */
+  font-size: 1.2rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-bottom: 20px; /* Space below the text */
+  text-align: center; /* Centered text */
 }

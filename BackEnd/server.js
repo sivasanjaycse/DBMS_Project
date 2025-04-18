@@ -48,3 +48,31 @@ app.get("/faculty/:id", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.post('/update-faculty', async (req, res) => {
+  const { faculty_id, name, phone, email, dname, college_name, password } = req.body;
+  console.log(req.body);
+  try {
+    const result = await sql`
+      SELECT try_update_faculty_details(
+        ${faculty_id},
+        ${name},
+        ${phone},
+        ${email},
+        ${dname},
+        ${college_name},
+        ${password}
+      ) as status;
+    `;
+    console.log("DB Function Result:", result); // 👀 Check what you're actually getting
+    if (result[0].status === 1) {
+      res.json({ success: true, message: 'Faculty updated successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Faculty not found or update failed' });
+    }
+
+  } catch (err) {
+    console.error('Error updating faculty:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
