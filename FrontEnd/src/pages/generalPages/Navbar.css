@@ -37,3 +37,7 @@
 .nav-item.active:hover {
   transform: translateY(0px);
 }
+#spl-nav-item {
+  background: none;
+  border: none;
+}

@@ -9,35 +9,51 @@ import UpdateFacultyDetails from "./pages/generalPages/UpdateFacultyDetails";
 import FacultyRegister from "./pages/generalPages/FacultyRegister";
 import FDPRegister from "./pages/fdpPages/FDPRegister";
 import FdpList from "./pages/fdpPages/FDPList";
-import SessionList from './pages/fdpPages/SessionList'; 
-import RegisteredPrograms from './pages/fdpPages/RegisteredPrograms';
-import FDPDetails from './pages/fdpPages/FDPDetails';
-import OngoingPrograms from './pages/fdpPages/OngoingPrograms';
-import CompletedPrograms from './pages/fdpPages/CompletedPrograms';
-
-
-<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />
+import SessionList from "./pages/fdpPages/SessionList";
+import RegisteredPrograms from "./pages/fdpPages/RegisteredPrograms";
+import FDPDetails from "./pages/fdpPages/FDPDetails";
+import OngoingPrograms from "./pages/fdpPages/OngoingPrograms";
+import CompletedPrograms from "./pages/fdpPages/CompletedPrograms";
+import FeedbackForm from "./pages/fdpPages/FeedbackForm";
+<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
 
 function App() {
   return (
     <>
       <Router>
-         <Header /> 
+        <Header />
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard/:facultyId" element={<FacultyDashboardWrapper />} />
+          <Route
+            path="/dashboard/:facultyId"
+            element={<FacultyDashboardWrapper />}
+          />
           <Route path="/update/:facultyId" element={<UpdateFacultyDetails />} />
           <Route path="/register" element={<FacultyRegister />} />
           <Route path="/fdp-list/:facultyId" element={<FdpList />} />
-          <Route path="/fdp/register/:facultyId/:fdpId" element={<FDPRegister />} />   
-          <Route path="/fdp/details/:facultyId/:fdpId" element={<FDPDetails />} />  
-<Route path="/fdp/session/:facultyId/:fdpId" element={<SessionList />} />
-<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />
-<Route path="/fdp/registered/:facultyId" element={<RegisteredPrograms />} />
+          <Route
+            path="/fdp/register/:facultyId/:fdpId"
+            element={<FDPRegister />}
+          />
+          <Route
+            path="/fdp/details/:facultyId/:fdpId"
+            element={<FDPDetails />}
+          />
+          <Route
+            path="/fdp/session/:facultyId/:fdpId"
+            element={<SessionList />}
+          />
+          <Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />
+          <Route
+            path="/fdp/registered/:facultyId"
+            element={<RegisteredPrograms />}
+          />
 
-<Route path="/fdp/completed/:facultyId" element={<CompletedPrograms />} />
-
-
+          <Route
+            path="/fdp/completed/:facultyId"
+            element={<CompletedPrograms />}
+          />
+          <Route path="/fdp/feedback/:facultyId/:fdpId" element={<FeedbackForm />} />
         </Routes>
       </Router>
       <Footer />

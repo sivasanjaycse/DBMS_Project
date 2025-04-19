@@ -49,8 +49,9 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-app.post('/update-faculty', async (req, res) => {
-  const { faculty_id, name, phone, email, dname, college_name, password } = req.body;
+app.post("/update-faculty", async (req, res) => {
+  const { faculty_id, name, phone, email, dname, college_name, password } =
+    req.body;
   console.log(req.body);
   try {
     const result = await sql`
@@ -65,18 +66,20 @@ app.post('/update-faculty', async (req, res) => {
       ) as status;
     `;
     if (result[0].status === 1) {
-      res.json({ success: true, message: 'Faculty updated successfully' });
+      res.json({ success: true, message: "Faculty updated successfully" });
     } else {
-      res.status(404).json({ success: false, message: 'Faculty not found or update failed' });
+      res.status(404).json({
+        success: false,
+        message: "Faculty not found or update failed",
+      });
     }
-
   } catch (err) {
-    console.error('Error updating faculty:', err);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error updating faculty:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-app.post('/add-faculty', async (req, res) => {
+app.post("/add-faculty", async (req, res) => {
   const { name, phone, email, dname, college, password } = req.body;
 
   try {
@@ -89,81 +92,91 @@ app.post('/add-faculty', async (req, res) => {
     const insertedId = result[0].new_fac_id;
 
     if (insertedId !== 0) {
-      res.json({ success: true, message: 'Faculty inserted', faculty_id: insertedId });
+      res.json({
+        success: true,
+        message: "Faculty inserted",
+        faculty_id: insertedId,
+      });
     } else {
-      res.status(400).json({ success: false, message: 'Insertion failed' });
+      res.status(400).json({ success: false, message: "Insertion failed" });
     }
   } catch (err) {
-    console.error('Error inserting faculty:', err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    console.error("Error inserting faculty:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
 
 // Get list of colleges
-app.get('/colleges', async (req, res) => {
+app.get("/colleges", async (req, res) => {
   try {
     const colleges = await sql`SELECT name FROM college`;
     res.json({ success: true, colleges });
   } catch (err) {
-    console.error('Error fetching colleges:', err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    console.error("Error fetching colleges:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
 
 // Get list of departments
-app.get('/departments', async (req, res) => {
+app.get("/departments", async (req, res) => {
   try {
     const departments = await sql`SELECT dname FROM department`;
     res.json({ success: true, departments });
   } catch (err) {
-    console.error('Error fetching departments:', err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    console.error("Error fetching departments:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
 
-app.get('/fdp/:id', async (req, res) => {
+app.get("/fdp/:id", async (req, res) => {
   const fdpId = parseInt(req.params.id);
   if (isNaN(fdpId)) {
-    return res.status(400).json({ success: false, message: 'Invalid FDP ID' });
+    return res.status(400).json({ success: false, message: "Invalid FDP ID" });
   }
 
   try {
     const result = await sql`SELECT * FROM get_fdp_details(${fdpId})`;
 
     if (result.length === 0) {
-      return res.status(404).json({ success: false, message: 'FDP not found' });
+      return res.status(404).json({ success: false, message: "FDP not found" });
     }
 
     res.json({ success: true, data: result[0] });
   } catch (err) {
-    console.error('Error fetching FDP details:', err);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error fetching FDP details:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-app.post('/register', async (req, res) => {
+app.post("/register", async (req, res) => {
   const { faculty_id, fdp_id, payment_status, date } = req.body;
 
   if (!faculty_id || !fdp_id || !payment_status || !date) {
-    return res.status(400).json({ success: false, message: 'Missing required fields' });
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing required fields" });
   }
 
   try {
     const result = await sql`
       SELECT * FROM insert_registration(${faculty_id}, ${fdp_id}, ${payment_status}, ${date})
     `;
-    
+
     if (result[0].insert_registration > 0) {
-      return res.status(201).json({ success: true, message: 'Registration inserted successfully' });
+      return res
+        .status(201)
+        .json({ success: true, message: "Registration inserted successfully" });
     } else {
-      return res.status(500).json({ success: false, message: 'Failed to insert registration' });
+      return res
+        .status(500)
+        .json({ success: false, message: "Failed to insert registration" });
     }
   } catch (err) {
-    console.error('Error inserting registration:', err);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error inserting registration:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
-app.get('/all-fdp', async (req, res) => {
+app.get("/all-fdp", async (req, res) => {
   try {
     const result = await sql`
       SELECT 
@@ -182,12 +195,14 @@ app.get('/all-fdp', async (req, res) => {
 
     res.status(200).json({ success: true, data: result });
   } catch (err) {
-    console.error('Error fetching FDP data:', err);
-    res.status(500).json({ success: false, message: 'Failed to fetch FDP details' });
+    console.error("Error fetching FDP data:", err);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch FDP details" });
   }
 });
 
-app.get('/fdp/:id/sessions', async (req, res) => {
+app.get("/fdp/:id/sessions", async (req, res) => {
   const fdpId = parseInt(req.params.id);
 
   try {
@@ -206,12 +221,12 @@ app.get('/fdp/:id/sessions', async (req, res) => {
 
     res.json({ success: true, sessions: result });
   } catch (error) {
-    console.error('Error fetching session details:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error fetching session details:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-app.get('/faculty/:id/registered-fdps', async (req, res) => {
+app.get("/faculty/:id/registered-fdps", async (req, res) => {
   const facultyId = parseInt(req.params.id);
 
   try {
@@ -227,12 +242,12 @@ app.get('/faculty/:id/registered-fdps', async (req, res) => {
 
     res.json({ success: true, fdps: result });
   } catch (error) {
-    console.error('Error retrieving registered FDPs:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error retrieving registered FDPs:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-app.get('/fdp/ongoing/:facultyId', async (req, res) => {
+app.get("/fdp/ongoing/:facultyId", async (req, res) => {
   const { facultyId } = req.params;
 
   try {
@@ -246,17 +261,17 @@ app.get('/fdp/ongoing/:facultyId', async (req, res) => {
 
     res.json({ success: true, data: result });
   } catch (error) {
-    console.error('Error fetching ongoing FDPs:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error fetching ongoing FDPs:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-app.get('/fdp/completed/:facultyId', async (req, res) => {
+app.get("/fdp/completed/:facultyId", async (req, res) => {
   const { facultyId } = req.params;
 
   try {
     const result = await sql`
-      SELECT f.title AS fdp_title, fac.name AS faculty_name
+      SELECT f.title AS fdp_title, fac.name AS faculty_name,f.fdp_id as fdp_id
       FROM participation p
       JOIN fdp_program f ON p.fdp_id = f.fdp_id
       JOIN faculty fac ON p.faculty_id = fac.faculty_id
@@ -266,8 +281,35 @@ app.get('/fdp/completed/:facultyId', async (req, res) => {
 
     res.json({ success: true, data: result });
   } catch (error) {
-    console.error('Error fetching completed FDPs:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error fetching completed FDPs:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
+app.post("/feedback", async (req, res) => {
+  const { faculty_id, fdp_id, rating, comments } = req.body;
+  // Basic validation
+  if (!faculty_id || !fdp_id || rating == null || comments == null) {
+    return res.status(400).json({ success: false, message: "Missing fields" });
+  }
+
+  try {
+    const result = await sql`
+      SELECT insert_feedback(
+        ${faculty_id},
+        ${fdp_id},
+        ${rating},
+        ${comments}
+      ) AS status;
+    `;
+    const status = result[0]?.status;
+    if (status === 1) {
+      res.json({ success: true, message: "Feedback submitted" });
+    } else {
+      res.status(500).json({ success: false, message: "Submission failed" });
+    }
+  } catch (err) {
+    console.error("Error inserting feedback:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
