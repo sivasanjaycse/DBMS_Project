@@ -79,6 +79,9 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .blue-button:hover {
@@ -144,4 +147,11 @@ body {
   cursor: not-allowed;
   box-shadow: none;
   opacity: 0.7;
+}
+th,
+td {
+  text-align: center !important;
+}
+.bigtable {
+  width: 50%;
 }

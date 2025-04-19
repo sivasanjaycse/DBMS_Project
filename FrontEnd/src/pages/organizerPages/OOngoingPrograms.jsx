@@ -31,7 +31,7 @@ const OOngoingPrograms = () => {
     <>
       <OrganizerNavbar />
       <div className="page">
-        <div className="container">
+        <div className="container bigtable">
           <h1 className="heading">Ongoing FDP Programs</h1>
           <table className="fdp-list">
             <tbody>
@@ -60,7 +60,7 @@ const OOngoingPrograms = () => {
                       }}
                       className="blue-button"
                     >
-                      More Details
+                      View
                     </button>
                   </td>
                   <td>
@@ -70,7 +70,7 @@ const OOngoingPrograms = () => {
                       }
                       className="blue-button"
                     >
-                      Funding Agencies
+                      View
                     </button>
                   </td>
                   <td>
@@ -85,7 +85,7 @@ const OOngoingPrograms = () => {
                       }
                       className="blue-button"
                     >
-                      View Participants
+                      View
                     </button>
                   </td>
                 </tr>

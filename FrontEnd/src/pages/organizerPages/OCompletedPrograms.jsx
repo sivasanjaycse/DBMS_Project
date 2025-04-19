@@ -46,7 +46,7 @@ const OCompletedPrograms = () => {
     <>
       <OrganizerNavbar />
       <div className="page">
-        <div className="container">
+        <div className="container bigtable">
           <h1 className="heading">Completed FDP Programs</h1>
           <table className="fdp-list">
             <thead>
@@ -77,7 +77,7 @@ const OCompletedPrograms = () => {
                       }}
                       className="blue-button"
                     >
-                      More Details
+                      View
                     </button>
                   </td>
                   <td>
@@ -87,7 +87,7 @@ const OCompletedPrograms = () => {
                       }
                       className="blue-button"
                     >
-                      Funding Agencies
+                     View
                     </button>
                   </td>
                   <td>

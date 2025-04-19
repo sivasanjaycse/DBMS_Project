@@ -1,6 +1,96 @@
 #funding-container {
   width: 40%;
 }
-#dashboard-Container {
-  width: 60%;
+#fdp-form-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #f0f4f8; /* Light blue background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 40%;
+  text-align: left;
+  margin-top: 10rem;
+  margin: 12rem auto 20px; /* leave space for header and navbar */
+}
+
+/* Form heading */
+h2 {
+  font-family: "Arial", sans-serif;
+  font-size: 24px;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Error message */
+.error {
+  color: #ff4d4d;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Form group (label and input) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-group label {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Input and select fields */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff; /* Blue focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); /* Light blue shadow */
+}
+
+/* Button styling */
+.blue-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+}
+
+.blue-button:hover {
+  background-color: #0056d2;
+}
+
+.blue-button:active {
+  background-color: #0043a7;
+}
+
+.blue-button:disabled {
+  background-color: #a2c4f5;
+  color: #e1eaff;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

@@ -460,3 +460,38 @@ app.get("/organizer/issue-certificates/:fdpId", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
+app.post("/organizer/insert", async (req, res) => {
+  const {
+    title,
+    venue,
+    startDate,
+    endDate,
+    organizerId,
+    organizingDepartment,
+    organizingCollege,
+  } = req.body;
+  console.log(req.body);
+  try {
+    const result = await sql`
+      SELECT insert_fdp_program(
+        ${title},
+        ${venue},
+        ${startDate},
+        ${endDate},
+        ${organizerId},
+        ${organizingDepartment},
+        ${organizingCollege}
+      ) AS status
+    `;
+
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "FDP inserted successfully" });
+    } else {
+      res.status(400).json({ success: false, message: "FDP insertion failed" });
+    }
+  } catch (error) {
+    console.error("Error inserting FDP:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});

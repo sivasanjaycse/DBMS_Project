@@ -43,7 +43,7 @@ export default function UpcomingPrograms() {
     <>
       <OrganizerNavbar />
       <div className="page">
-        <div className="container">
+        <div className="container bigtable">
           <h2 className="heading">Upcoming FDPs</h2>
           <table className="fdp-list">
             <thead>
@@ -72,7 +72,7 @@ export default function UpcomingPrograms() {
                         );
                       }}
                     >
-                      More Details
+                      View
                     </button>
                   </td>
                   <td>
@@ -82,7 +82,7 @@ export default function UpcomingPrograms() {
                         navigate("/organizer/funding/" + fdp.fdp_id);
                       }}
                     >
-                      Funding Agencies
+                      View
                     </button>
                   </td>
                   <td>

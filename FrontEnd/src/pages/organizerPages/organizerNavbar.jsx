@@ -9,7 +9,7 @@ const OrganizerNavbar = () => {
       <NavLink to={"/organizer/dashboard/" + facultyId} className="nav-item">
         Dashboard
       </NavLink>
-      <NavLink to={"/" + facultyId} className="nav-item">
+      <NavLink to={"/organizer/addnewfdp/" + facultyId} className="nav-item">
         New FDP Program
       </NavLink>
       <NavLink to={"/organizer/upcoming/" + facultyId} className="nav-item">

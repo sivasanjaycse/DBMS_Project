@@ -23,6 +23,7 @@ import FundingDetails from "./pages/organizerPages/FundingDetails";
 import OOngoingPrograms from "./pages/organizerPages/OOngoingPrograms";
 import ParticipantList from "./pages/organizerPages/ParticipantList";
 import OCompletedPrograms from "./pages/organizerPages/OCompletedPrograms";
+import FdpForm from "./pages/organizerPages/fdpForm";
 <Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
             path="/organizer/completed/:facultyId"
             element={<OCompletedPrograms />}
           />
+          <Route path="/organizer/addnewfdp/:facultyId" element={<FdpForm />} />
         </Routes>
       </Router>
       <Footer />
