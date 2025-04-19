@@ -20,6 +20,9 @@ import UpcomingPrograms from "./pages/organizerPages/UpcomingPrograms";
 import OFDPDetails from "./pages/organizerPages/OFDPDetails";
 import OSessionList from "./pages/organizerPages/OSessionList";
 import FundingDetails from "./pages/organizerPages/FundingDetails";
+import OOngoingPrograms from "./pages/organizerPages/OOngoingPrograms";
+import ParticipantList from "./pages/organizerPages/ParticipantList";
+import OCompletedPrograms from "./pages/organizerPages/OCompletedPrograms";
 <Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
 
 function App() {
@@ -81,6 +84,18 @@ function App() {
           <Route
             path="/organizer/funding/:fdpId"
             element={<FundingDetails />}
+          />
+          <Route
+            path="/organizer/ongoing/:facultyId"
+            element={<OOngoingPrograms />}
+          />
+          <Route
+            path="/organizer/participant-list/:facultyId/:fdpId"
+            element={<ParticipantList />}
+          />
+          <Route
+            path="/organizer/completed/:facultyId"
+            element={<OCompletedPrograms />}
           />
         </Routes>
       </Router>

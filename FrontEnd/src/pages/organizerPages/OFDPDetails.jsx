@@ -28,7 +28,7 @@ const OFDPDetails = () => {
   }, [fdpId]);
 
   const handleRegister = async () => {
-    navigate(`/organizer/upcoming/${facultyId}`);
+    navigate(-1);
   };
 
   if (loading) {
@@ -102,7 +102,7 @@ const OFDPDetails = () => {
           </button>
           <br />
           <br />
-          <a href={`/organizer/sessionlist/${fdpId}`}>
+          <a href={`/organizer/sessionlist/${facultyId}/${fdpId}`}>
             <button className="blue-button">More Details</button>
           </a>
         </div>

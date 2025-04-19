@@ -367,3 +367,96 @@ app.post("/transfer-to-participation/:fdpId", async (req, res) => {
       .json({ success: false, message: "Server error during transfer" });
   }
 });
+
+app.get("/fdp/oongoing/:facultyId", async (req, res) => {
+  const facultyId = parseInt(req.params.facultyId);
+  console.log(facultyId);
+  try {
+    const result = await sql`
+      SELECT * FROM get_ongoing_fdps_with_participation(${facultyId})
+    `;
+    console.log(result);
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error("Error fetching ongoing FDPs:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/organizer/:fdpId/participants", async (req, res) => {
+  const fdpId = parseInt(req.params.fdpId);
+
+  try {
+    const result = await sql`
+      SELECT * FROM get_participants_by_fdp(${fdpId})
+    `;
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error("Error fetching participants:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.delete("/participation/:facultyId/:fdpId", async (req, res) => {
+  const facultyId = parseInt(req.params.facultyId);
+  const fdpId = parseInt(req.params.fdpId);
+
+  try {
+    const result = await sql`
+      DELETE FROM PARTICIPATION 
+      WHERE FACULTY_ID = ${facultyId} AND FDP_ID = ${fdpId}
+    `;
+
+    if (result.count > 0) {
+      res.json({
+        success: true,
+        message: "Participation entry deleted successfully",
+      });
+    } else {
+      res.status(404).json({ success: false, message: "Entry not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting participation entry:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/organizer/coompleted/:facultyId", async (req, res) => {
+  const facultyId = parseInt(req.params.facultyId);
+
+  try {
+    const result = await sql`
+      SELECT * FROM get_completed_fdps_with_participation(${facultyId})
+    `;
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error("Error fetching completed FDPs:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/organizer/issue-certificates/:fdpId", async (req, res) => {
+  const fdpId = parseInt(req.params.fdpId);
+
+  try {
+    const result = await sql`
+      SELECT issue_certificates_for_fdp(${fdpId}) AS count
+    `;
+
+    const count = result[0].count;
+
+    if (count > 0) {
+      res.json({ success: true, message: `${count} certificates issued.` });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "No certificates issued or no participants found.",
+      });
+    }
+  } catch (error) {
+    console.error("Error issuing certificates:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});

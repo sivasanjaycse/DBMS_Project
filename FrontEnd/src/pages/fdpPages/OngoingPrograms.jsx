@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams,useNavigate } from 'react-router-dom';
-import Navbar from '../generalPages/Navbar';
-import './fdp-list-register.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "../generalPages/Navbar";
+import "./fdp-list-register.css";
 
 const OngoingPrograms = () => {
   const { facultyId } = useParams();
@@ -10,13 +10,14 @@ const OngoingPrograms = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/fdp/ongoing/${facultyId}`)
-      .then(res => {
+    axios
+      .get(`http://localhost:3000/fdp/ongoing/${facultyId}`)
+      .then((res) => {
         if (res.data.success) setOngoingFdps(res.data.data);
-        else console.error('Failed to fetch ongoing FDPs');
+        else console.error("Failed to fetch ongoing FDPs");
       })
-      .catch(err => {
-        console.error('Error fetching ongoing FDPs:', err);
+      .catch((err) => {
+        console.error("Error fetching ongoing FDPs:", err);
       });
   }, [facultyId]);
   const handleRegister = (fdpId) => {
@@ -44,7 +45,12 @@ const OngoingPrograms = () => {
                   <tr key={index}>
                     <td>{fdp.title}</td>
                     <td>
-                    <button className='blue-button' onClick={() => handleRegister(fdp.fdp_id)}>More Details</button>
+                      <button
+                        className="blue-button"
+                        onClick={() => handleRegister(fdp.fdp_id)}
+                      >
+                        More Details
+                      </button>
                     </td>
                   </tr>
                 ))}

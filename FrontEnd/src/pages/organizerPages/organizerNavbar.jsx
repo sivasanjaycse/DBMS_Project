@@ -15,10 +15,10 @@ const OrganizerNavbar = () => {
       <NavLink to={"/organizer/upcoming/" + facultyId} className="nav-item">
         Upcoming Programs
       </NavLink>
-      <NavLink to={"/" + facultyId} className="nav-item">
+      <NavLink to={"/organizer/ongoing/" + facultyId} className="nav-item">
         Ongoing Programs
       </NavLink>
-      <NavLink to={"/" + facultyId} className="nav-item">
+      <NavLink to={"/organizer/completed/" + facultyId} className="nav-item">
         Completed Programs
       </NavLink>
       <NavLink
