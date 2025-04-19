@@ -15,6 +15,11 @@ import FDPDetails from "./pages/fdpPages/FDPDetails";
 import OngoingPrograms from "./pages/fdpPages/OngoingPrograms";
 import CompletedPrograms from "./pages/fdpPages/CompletedPrograms";
 import FeedbackForm from "./pages/fdpPages/FeedbackForm";
+import OrganizerDashboard from "./pages/organizerPages/OrganizerDashboard";
+import UpcomingPrograms from "./pages/organizerPages/UpcomingPrograms";
+import OFDPDetails from "./pages/organizerPages/OFDPDetails";
+import OSessionList from "./pages/organizerPages/OSessionList";
+import FundingDetails from "./pages/organizerPages/FundingDetails";
 <Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
 
 function App() {
@@ -53,7 +58,30 @@ function App() {
             path="/fdp/completed/:facultyId"
             element={<CompletedPrograms />}
           />
-          <Route path="/fdp/feedback/:facultyId/:fdpId" element={<FeedbackForm />} />
+          <Route
+            path="/fdp/feedback/:facultyId/:fdpId"
+            element={<FeedbackForm />}
+          />
+          <Route
+            path="/organizer/dashboard/:facultyId"
+            element={<OrganizerDashboard />}
+          />
+          <Route
+            path="/organizer/upcoming/:facultyId"
+            element={<UpcomingPrograms />}
+          />
+          <Route
+            path="/organizer/fdpdetails/:facultyId/:fdpId"
+            element={<OFDPDetails />}
+          />
+          <Route
+            path="/organizer/sessionlist/:facultyId/:fdpId"
+            element={<OSessionList />}
+          />
+          <Route
+            path="/organizer/funding/:fdpId"
+            element={<FundingDetails />}
+          />
         </Routes>
       </Router>
       <Footer />

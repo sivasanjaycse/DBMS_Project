@@ -5,14 +5,6 @@ import "./Navbar.css"; // Import the CSS
 
 const Navbar = () => {
   const { facultyId } = useParams();
-  const handleSwitch = () => {
-    const confirmed = window.confirm(
-      "Do you really want to switch to Organizer Mode?"
-    );
-    if (confirmed) {
-      window.location.href = "/organizer/dashboard";
-    }
-  };
   return (
     <nav className="navbar">
       <NavLink to={"/dashboard/" + facultyId} className="nav-item">
@@ -30,7 +22,11 @@ const Navbar = () => {
       <NavLink to={"/fdp/completed/" + facultyId} className="nav-item">
         Completed Programs
       </NavLink>
-      <NavLink onClick={handleSwitch} className="nav-item" id="spl-nav-item">
+      <NavLink
+        to={"/organizer/dashboard/" + facultyId}
+        className="nav-item"
+        id="spl-nav-item"
+      >
         Oragnizer
       </NavLink>
       <NavLink to="/" className="nav-item">

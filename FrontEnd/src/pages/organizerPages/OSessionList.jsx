@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./fdp-list-register.css";
 
-const SessionList = () => {
+const OSessionList = () => {
   const { facultyId, fdpId } = useParams();
   const [sessions, setSessions] = useState([]);
 
@@ -53,12 +52,7 @@ const SessionList = () => {
             </table>
           )}
           <br />
-          <a href={`/fdp/register/${facultyId}/${fdpId}`}>
-            <button className="blue-button">Back To Register</button>
-          </a>
-          <br />
-          <br />
-          <a href={`/fdp/registered/${facultyId}`}>
+          <a href={`/organizer/fdpdetails/` + facultyId + `/` + fdpId}>
             <button className="blue-button">Back</button>
           </a>
         </div>
@@ -67,4 +61,4 @@ const SessionList = () => {
   );
 };
 
-export default SessionList;
+export default OSessionList;

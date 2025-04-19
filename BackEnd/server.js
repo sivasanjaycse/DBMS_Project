@@ -313,3 +313,57 @@ app.post("/feedback", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+app.get("/fdp/upcoming/:facultyId", async (req, res) => {
+  const { facultyId } = req.params;
+
+  try {
+    const result = await sql`
+      SELECT * FROM get_upcoming_fdps_with_count(${facultyId});
+    `;
+
+    res.json({ success: true, data: result });
+  } catch (err) {
+    console.error("Error fetching upcoming FDPs:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/api/fdp/:fdpId/funding", async (req, res) => {
+  const { fdpId } = req.params;
+  try {
+    const result = await sql`
+      SELECT * FROM get_funding_details_by_fdp(${fdpId})
+    `;
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching funding details:", error);
+    res.status(500).json({ error: "Failed to fetch funding details" });
+  }
+});
+
+app.post("/transfer-to-participation/:fdpId", async (req, res) => {
+  const fdpId = parseInt(req.params.fdpId);
+  try {
+    const result = await sql`
+      SELECT transfer_registration_to_participation(${fdpId}) AS transferred_count
+    `;
+    const count = result[0].transferred_count;
+
+    if (count > 0) {
+      res.json({
+        success: true,
+        message: `${count} people moved to participation.`,
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "No registrations found to transfer.",
+      });
+    }
+  } catch (error) {
+    console.error("Error transferring records:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error during transfer" });
+  }
+});

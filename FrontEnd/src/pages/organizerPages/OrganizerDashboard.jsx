@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
-import "./FacultyDashboard.css";
+import OrganizerNavbar from "./organizerNavbar.jsx";
+// import "./OrganizerDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGraduate } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-
-export default function FacultyDashboard({ facultyId }) {
+import { useParams } from "react-router-dom";
+export default function OrganizerDashboard() {
   const [faculty, setFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  
+  const { facultyId } = useParams();
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
@@ -31,7 +29,7 @@ export default function FacultyDashboard({ facultyId }) {
 
   return (
     <>
-      <Navbar />
+      <OrganizerNavbar />
       <div className="page">
         <div className="container" id="DashboardContainer">
           <h1 className="heading">
@@ -63,9 +61,6 @@ export default function FacultyDashboard({ facultyId }) {
               </tr>
             </tbody>
           </table>
-          <button className="blue-button" onClick={() => navigate(`/update/${facultyId}`)}>
-  Change My Details
-</button>
         </div>
       </div>
     </>
