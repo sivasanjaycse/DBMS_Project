@@ -33,8 +33,6 @@ const SessionList = () => {
                   <th>Topic</th>
                   <th>Mode</th>
                   <th>Duration (hrs)</th>
-                  <th>Date</th>
-                  <th>Time</th>
                   <th>Handled By</th>
                 </tr>
               </thead>
@@ -44,8 +42,6 @@ const SessionList = () => {
                     <td>{session.topic}</td>
                     <td>{session.mode}</td>
                     <td>{session.duration}</td>
-                    <td>{session.session_date.split("T")[0]}</td>
-                    <td>{session.session_time}</td>
                     <td>{session.faculty_name}</td>
                   </tr>
                 ))}

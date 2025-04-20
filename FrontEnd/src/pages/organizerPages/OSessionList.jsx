@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const OSessionList = () => {
   const { facultyId, fdpId } = useParams();
   const [sessions, setSessions] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`http://localhost:3000/fdp/${fdpId}/sessions`)
@@ -32,9 +32,8 @@ const OSessionList = () => {
                   <th>Topic</th>
                   <th>Mode</th>
                   <th>Duration (hrs)</th>
-                  <th>Date</th>
-                  <th>Time</th>
                   <th>Handled By</th>
+                  <th>Modify</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,9 +42,24 @@ const OSessionList = () => {
                     <td>{session.topic}</td>
                     <td>{session.mode}</td>
                     <td>{session.duration}</td>
-                    <td>{session.session_date.split("T")[0]}</td>
-                    <td>{session.session_time}</td>
                     <td>{session.faculty_name}</td>
+                    <td>
+                      <button
+                        className="blue-button"
+                        onClick={() => {
+                          navigate(
+                            "/organizer/update-session/" +
+                              facultyId +
+                              "/" +
+                              fdpId +
+                              "/" +
+                              session.session_id
+                          );
+                        }}
+                      >
+                        Modify
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

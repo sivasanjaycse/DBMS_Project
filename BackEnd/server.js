@@ -208,11 +208,10 @@ app.get("/fdp/:id/sessions", async (req, res) => {
   try {
     const result = await sql`
       SELECT 
+        s.session_id,
         s.topic,
         s.mode,
         s.duration,
-        s.date AS session_date,
-        s.time AS session_time,
         f.name AS faculty_name
       FROM session s
       JOIN faculty f ON s.handling_fac_id = f.faculty_id
@@ -492,6 +491,83 @@ app.post("/organizer/insert", async (req, res) => {
     }
   } catch (error) {
     console.error("Error inserting FDP:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.put("/organizer/session/update/:sessionId", async (req, res) => {
+  const sessionId = parseInt(req.params.sessionId);
+  const { mode, duration, topic, facultyId } = req.body;
+
+  try {
+    const result = await sql`
+      SELECT update_session_by_id(${sessionId}, ${mode}, ${duration}, ${topic}, ${facultyId}) AS status
+    `;
+
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "Session updated successfully" });
+    } else {
+      res.status(404).json({ success: false, message: "Session not found" });
+    }
+  } catch (error) {
+    console.error("Error updating session:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/organizer/session/:sessionId", async (req, res) => {
+  const sessionId = parseInt(req.params.sessionId);
+
+  try {
+    const result = await sql`
+      SELECT * FROM session WHERE session_id = ${sessionId}
+    `;
+    console.log(result);
+    if (result.length > 0) {
+      res.json({ success: true, data: result[0] });
+    } else {
+      res.status(404).json({ success: false, message: "Session not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching session:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/faculty/by-department/:departmentName", async (req, res) => {
+  const departmentName = req.params.departmentName;
+
+  try {
+    const result = await sql`
+      SELECT faculty_id, name 
+      FROM faculty 
+      WHERE department = ${departmentName}
+    `;
+
+    res.json({ success: true, faculty: result });
+  } catch (error) {
+    console.error("Error fetching faculty list:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/organizer/fdp-department/:fdpId", async (req, res) => {
+  const fdpId = parseInt(req.params.fdpId);
+
+  try {
+    const result = await sql`
+      SELECT organizing_department 
+      FROM fdp_program 
+      WHERE fdp_id = ${fdpId}
+    `;
+
+    if (result.length > 0) {
+      res.json({ success: true, department: result[0].organizing_department });
+    } else {
+      res.status(404).json({ success: false, message: "FDP not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching department for FDP:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 });

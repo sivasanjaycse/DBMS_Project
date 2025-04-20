@@ -24,6 +24,7 @@ import OOngoingPrograms from "./pages/organizerPages/OOngoingPrograms";
 import ParticipantList from "./pages/organizerPages/ParticipantList";
 import OCompletedPrograms from "./pages/organizerPages/OCompletedPrograms";
 import FdpForm from "./pages/organizerPages/fdpForm";
+import SessionUpdateForm from "./pages/organizerPages/UpdateSessionForm";
 <Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
 
 function App() {
@@ -99,6 +100,10 @@ function App() {
             element={<OCompletedPrograms />}
           />
           <Route path="/organizer/addnewfdp/:facultyId" element={<FdpForm />} />
+          <Route
+            path="/organizer/update-session/:facultyId/:fdpId/:sessId"
+            element={<SessionUpdateForm />}
+          />
         </Routes>
       </Router>
       <Footer />
