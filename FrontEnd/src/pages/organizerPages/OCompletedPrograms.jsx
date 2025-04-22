@@ -46,7 +46,7 @@ const OCompletedPrograms = () => {
     <>
       <OrganizerNavbar />
       <div className="page">
-        <div className="container bigtable">
+        <div className="container bigtable" id="og-container">
           <h1 className="heading">Completed FDP Programs</h1>
           <table className="fdp-list">
             <thead>
@@ -57,6 +57,7 @@ const OCompletedPrograms = () => {
                 <th>More Details</th>
                 <th>Funding Agencies</th>
                 <th>Certificates</th>
+                <th>Feedback</th>
               </tr>
             </thead>
             <tbody>
@@ -103,6 +104,14 @@ const OCompletedPrograms = () => {
                       Issue
                     </button>
                   </td>
+                  <td>
+  <button
+    className="blue-button"
+    onClick={() => navigate(`/organizer/feedback-list/${fdp.fdp_id}`)}
+  >
+    Feedback
+  </button>
+</td>
                 </tr>
               ))}
             </tbody>

@@ -18,6 +18,25 @@ const OSessionList = () => {
       });
   }, [fdpId]);
 
+  const handleDelete = (sessionId) => {
+    if (!window.confirm("Are You Sure to Delete ?")) return;
+
+    axios
+      .delete(`http://localhost:3000/organizer/session/delete/${sessionId}`)
+      .then((res) => {
+        if (res.data.success) {
+          alert("Session deleted ✅");
+          window.location.reload(); // Reload the page to reflect changes
+        } else {
+          alert("Deletion failed ❌");
+        }
+      })
+      .catch((err) => {
+        console.error("Error deleting session:", err);
+        alert("Server error while deleting ❌");
+      });
+  };
+
   return (
     <>
       <div className="page">
@@ -34,6 +53,7 @@ const OSessionList = () => {
                   <th>Duration (hrs)</th>
                   <th>Handled By</th>
                   <th>Modify</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -60,15 +80,22 @@ const OSessionList = () => {
                         Modify
                       </button>
                     </td>
+                    <td>
+                    <button
+                      className="red-button"
+                      onClick={() => handleDelete(session.session_id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
           <br />
-          <a href={`/organizer/fdpdetails/` + facultyId + `/` + fdpId}>
-            <button className="blue-button">Back</button>
-          </a>
+          <button className="blue-button" onClick={()=>navigate(`/organizer/add-session/${facultyId}/${fdpId}`)}>Add New Session</button>
+            <button className="blue-button" onClick={()=>navigate(`/organizer/fdpdetails/` + facultyId + `/` + fdpId)}>Back</button>
         </div>
       </div>
     </>

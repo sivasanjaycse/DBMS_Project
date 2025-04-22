@@ -51,6 +51,7 @@ const FdpForm = () => {
       });
 
       alert(res.data.message);
+      window.location.reload(); // Reload the page to reflect changes
     } catch (err) {
       console.error(err);
       setError("Failed to insert FDP. Try again.");

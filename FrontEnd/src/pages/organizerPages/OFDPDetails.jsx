@@ -28,7 +28,7 @@ const OFDPDetails = () => {
   }, [fdpId]);
 
   const handleRegister = async () => {
-    navigate(-1);
+    navigate('/organizer/upcoming/' + facultyId);
   };
 
   if (loading) {

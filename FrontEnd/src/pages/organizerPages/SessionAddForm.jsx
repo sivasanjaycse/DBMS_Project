@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SessionUpdateForm = () => {
+const SessionAddForm = () => {
   const { facultyId, fdpId, sessId } = useParams();
   const [facultyList, setFacultyList] = useState([]);
   const [department, setDepartment] = useState("");
@@ -28,24 +28,6 @@ const SessionUpdateForm = () => {
         console.error("Error fetching department:", err);
       });
   }, [fdpId]);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/organizer/session/${sessId}`)
-      .then((res) => {
-        const data = res.data.data;
-
-        // 🎯 FILLING DEFAULT VALUES FROM DB RESPONSE
-        setFormData({
-          topic: data.topic || "",
-          mode: data.mode || "",
-          duration: data.duration || "",
-          handlingFacultyId: data.handling_fac_id || "",
-        });
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-      });
-  }, [sessId]);
 
   useEffect(() => {
     if (department) {
@@ -79,13 +61,14 @@ const SessionUpdateForm = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.put(
-        `http://localhost:3000/organizer/session/update/${sessId}`,
+      const res = await axios.post(
+        `http://localhost:3000/organizer/session/insert`,
         {
           topic: formData.topic,
           mode: formData.mode,
           duration: formData.duration,
           facultyId: formData.handlingFacultyId,
+          fdpId: fdpId,
         }
       );
       alert(res.data.message);
@@ -100,7 +83,7 @@ const SessionUpdateForm = () => {
     <div className="page">
       <div id="fdp-form-container">
         <form onSubmit={handleSubmit}>
-          <h2>Update Session</h2>
+          <h2>Insert Session</h2>
 
           <div className="form-group">
             <label htmlFor="topic">Topic:</label>
@@ -165,4 +148,4 @@ const SessionUpdateForm = () => {
   );
 };
 
-export default SessionUpdateForm;
+export default SessionAddForm;

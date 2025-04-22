@@ -25,7 +25,9 @@ import ParticipantList from "./pages/organizerPages/ParticipantList";
 import OCompletedPrograms from "./pages/organizerPages/OCompletedPrograms";
 import FdpForm from "./pages/organizerPages/fdpForm";
 import SessionUpdateForm from "./pages/organizerPages/UpdateSessionForm";
-<Route path="/fdp/ongoing/:facultyId" element={<OngoingPrograms />} />;
+import SessionAddForm from "./pages/organizerPages/SessionAddForm";
+import FundingInsertForm from "./pages/organizerPages/FundingInsertForm";
+import FeedbackListPage from "./pages/organizerPages/FeedbackListPage";
 
 function App() {
   return (
@@ -104,6 +106,16 @@ function App() {
             path="/organizer/update-session/:facultyId/:fdpId/:sessId"
             element={<SessionUpdateForm />}
           />
+          <Route
+            path="/organizer/add-session/:facultyId/:fdpId"
+            element={<SessionAddForm />}
+          />
+          <Route
+            path="/organizer/add-funding/:fdpId"
+            element={<FundingInsertForm />}/>
+            <Route
+            path="/organizer/feedback-list/:fdpId"
+            element={<FeedbackListPage/>}/>
         </Routes>
       </Router>
       <Footer />

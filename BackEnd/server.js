@@ -541,7 +541,7 @@ app.get("/faculty/by-department/:departmentName", async (req, res) => {
     const result = await sql`
       SELECT faculty_id, name 
       FROM faculty 
-      WHERE department = ${departmentName}
+      WHERE dname = ${departmentName}
     `;
 
     res.json({ success: true, faculty: result });
@@ -568,6 +568,104 @@ app.get("/organizer/fdp-department/:fdpId", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching department for FDP:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.post("/organizer/session/insert", async (req, res) => {
+  const { mode, duration, topic, facultyId, fdpId } = req.body;
+
+  try {
+    const result = await sql`
+      SELECT insert_session(
+        ${mode},
+        ${duration},
+        ${topic},
+        ${facultyId},
+        ${fdpId}
+      ) AS status
+    `;
+
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "Session inserted successfully" });
+    } else {
+      res.status(400).json({ success: false, message: "Session insertion failed" });
+    }
+  } catch (error) {
+    console.error("Error inserting session:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.delete("/organizer/session/delete/:sessionId", async (req, res) => {
+  const sessionId = parseInt(req.params.sessionId);
+
+  try {
+    const result = await sql`
+      SELECT delete_session_by_id(${sessionId}) AS status
+    `;
+
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "Session deleted successfully" });
+    } else {
+      res.status(400).json({ success: false, message: "Session deletion failed" });
+    }
+  } catch (error) {
+    console.error("Error deleting session:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+app.post("/organizer/funding/insert", async (req, res) => {
+  const { amount, fundingAgency, fdpId } = req.body;
+console.log(req.body);
+  try {
+    const result = await sql`
+      SELECT insert_funding_and_link_fdp(${amount}, ${fundingAgency}, ${fdpId}) AS status
+    `;
+    console.log(result);
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "Funding inserted and linked successfully" });
+    } else {
+      res.status(400).json({ success: false, message: "Insertion failed" });
+    }
+  } catch (error) {
+    console.error("Error inserting funding and linking FDP:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.delete("/organizer/funding/delete/:fundingId", async (req, res) => {
+  const fundingId = parseInt(req.params.fundingId);
+
+  try {
+    const result = await sql`
+      SELECT delete_funding_and_unlink_fdp(${fundingId}) AS status
+    `;
+
+    if (result[0].status === 1) {
+      res.json({ success: true, message: "Funding and linkage deleted successfully" });
+    } else {
+      res.status(400).json({ success: false, message: "Deletion failed" });
+    }
+  } catch (error) {
+    console.error("Error deleting funding and unlinking FDP:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.get("/fdp/:fdpId/feedback", async (req, res) => {
+  const fdpId = parseInt(req.params.fdpId);
+
+  try {
+    const result = await sql`
+      SELECT rating, comments
+      FROM feedback
+      WHERE fdp_id = ${fdpId}
+    `;
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error("Error fetching feedback:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
