@@ -187,6 +187,7 @@ app.get("/all-fdp", async (req, res) => {
         fdp.END_DATE,
         fdp.ORGANIZING_DEPARTMENT,
         fdp.ORGANIZING_COLLEGE,
+        fdp.days,
         f.name AS organizer_name,
         f.phone AS organizer_phone
       FROM FDP_PROGRAM fdp

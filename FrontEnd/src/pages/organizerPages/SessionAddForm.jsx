@@ -140,7 +140,7 @@ const SessionAddForm = () => {
           </div>
 
           <button type="submit" className="blue-button">
-            Update
+            Insert
           </button>
         </form>
       </div>
@@ -149,3 +149,5 @@ const SessionAddForm = () => {
 };
 
 export default SessionAddForm;
+
+
