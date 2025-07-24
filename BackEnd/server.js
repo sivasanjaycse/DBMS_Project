@@ -9,7 +9,9 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 app.use(cors()); // This allows your frontend to talk to the backend
-
+app.get("/",(req,res)=>{
+  res.send("HI WELCOME TO BACKEND!!!");
+});
 // Route to authenticate user
 app.post("/login", async (req, res) => {
   const { faculty_id, password } = req.body;
