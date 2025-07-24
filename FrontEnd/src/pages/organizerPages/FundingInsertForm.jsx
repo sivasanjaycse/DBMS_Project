@@ -22,7 +22,7 @@ const FundingInsertForm = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/organizer/funding/insert",
+        "https://fdpms-webservice.onrender.com/organizer/funding/insert",
         {
           amount: formData.amount,
           fundingAgency: formData.fundingAgency,

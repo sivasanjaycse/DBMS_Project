@@ -11,7 +11,7 @@ const ParticipantList = () => {
     const fetchParticipants = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/organizer/${fdpId}/participants`
+          `https://fdpms-webservice.onrender.com/organizer/${fdpId}/participants`
         );
         setParticipants(res.data.data);
       } catch (err) {
@@ -25,7 +25,7 @@ const ParticipantList = () => {
   const handleDelete = async (tempfac) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/participation/${tempfac}/${fdpId}`
+        `https://fdpms-webservice.onrender.com/participation/${tempfac}/${fdpId}`
       );
       alert(res.data.message);
       // Refresh the list after deletion

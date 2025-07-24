@@ -12,7 +12,7 @@ const OCompletedPrograms = () => {
     const fetchCompletedFdps = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/organizer/coompleted/${facultyId}`
+          `https://fdpms-webservice.onrender.com/organizer/coompleted/${facultyId}`
         );
         setFdps(res.data.data);
       } catch (err) {
@@ -25,7 +25,7 @@ const OCompletedPrograms = () => {
   const handleIssueCertificates = async (fdpId) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/organizer/issue-certificates/${fdpId}`
+        `https://fdpms-webservice.onrender.com/organizer/issue-certificates/${fdpId}`
       );
       alert(res.data.message);
     } catch (error) {

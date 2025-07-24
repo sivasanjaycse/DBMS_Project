@@ -15,7 +15,7 @@ export default function FacultyDashboard({ facultyId }) {
     const fetchFaculty = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/faculty/${facultyId}`
+          `https://fdpms-webservice.onrender.com/faculty/${facultyId}`
         );
         setFaculty(res.data[0]);
         setLoading(false);

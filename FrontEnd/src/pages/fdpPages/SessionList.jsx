@@ -9,7 +9,7 @@ const SessionList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/fdp/${fdpId}/sessions`)
+      .get(`https://fdpms-webservice.onrender.com/fdp/${fdpId}/sessions`)
       .then((res) => {
         if (res.data.success) setSessions(res.data.sessions);
         else console.error("Error loading sessions");

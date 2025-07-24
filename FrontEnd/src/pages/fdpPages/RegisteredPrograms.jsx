@@ -10,7 +10,7 @@ const RegisteredPrograms = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/faculty/${facultyId}/registered-fdps`)
+    axios.get(`https://fdpms-webservice.onrender.com/faculty/${facultyId}/registered-fdps`)
       .then(res => {
         if (res.data.success) setFdps(res.data.fdps);
         else console.error('Failed to load registered FDPs');

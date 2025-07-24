@@ -16,7 +16,7 @@ const SessionAddForm = () => {
   useEffect(() => {
     // Fetch the department based on fdpId
     axios
-      .get(`http://localhost:3000/organizer/fdp-department/${fdpId}`)
+      .get(`https://fdpms-webservice.onrender.com/organizer/fdp-department/${fdpId}`)
       .then((res) => {
         if (res.data.success) {
           setDepartment(res.data.department); // Set department
@@ -33,7 +33,7 @@ const SessionAddForm = () => {
     if (department) {
       // Fetch faculty list based on department once the department is set
       axios
-        .get(`http://localhost:3000/faculty/by-department/${department}`)
+        .get(`https://fdpms-webservice.onrender.com/faculty/by-department/${department}`)
         .then((res) => {
           if (res.data.success) {
             setFacultyList(res.data.faculty); // Set the list of faculty from response
@@ -62,7 +62,7 @@ const SessionAddForm = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:3000/organizer/session/insert`,
+        `https://fdpms-webservice.onrender.com/organizer/session/insert`,
         {
           topic: formData.topic,
           mode: formData.mode,

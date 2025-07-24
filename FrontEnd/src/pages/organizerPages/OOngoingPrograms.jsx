@@ -15,7 +15,7 @@ const OOngoingPrograms = () => {
           `Sending request to fetch ongoing FDPs for facultyId: ${facultyId}`
         );
         const res = await axios.get(
-          `http://localhost:3000/fdp/oongoing/${facultyId}`
+          `https://fdpms-webservice.onrender.com/fdp/oongoing/${facultyId}`
         );
         console.log("Response received:", res.data);
         setFdps(res.data.data);

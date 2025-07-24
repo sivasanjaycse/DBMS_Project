@@ -18,10 +18,10 @@ const FacultyRegister = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:3000/departments").then((res) => {
+    axios.get("https://fdpms-webservice.onrender.com/departments").then((res) => {
       setDepartments(res.data.departments.map((d) => d.dname));
     });
-    axios.get("http://localhost:3000/colleges").then((res) => {
+    axios.get("https://fdpms-webservice.onrender.com/colleges").then((res) => {
       setColleges(res.data.colleges.map((c) => c.name));
     });
   }, []);
@@ -33,7 +33,7 @@ const FacultyRegister = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/add-faculty", formData);
+      const res = await axios.post("https://fdpms-webservice.onrender.com/add-faculty", formData);
       alert(`Faculty registered! ID: ${res.data.faculty_id}
 Please Login To Continue`);
       navigate(`/`);

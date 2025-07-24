@@ -10,7 +10,7 @@ const CompletedPrograms = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/fdp/completed/${facultyId}`)
+      .get(`https://fdpms-webservice.onrender.com/fdp/completed/${facultyId}`)
       .then((res) => {
         if (res.data.success) setFdps(res.data.data);
         else console.error("Failed to fetch completed FDPs");

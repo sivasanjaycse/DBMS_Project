@@ -12,7 +12,7 @@ const FeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/feedback", {
+      const res = await axios.post("https://fdpms-webservice.onrender.com/feedback", {
         faculty_id: parseInt(facultyId),
         fdp_id: parseInt(fdpId),
         rating: parseInt(rating),

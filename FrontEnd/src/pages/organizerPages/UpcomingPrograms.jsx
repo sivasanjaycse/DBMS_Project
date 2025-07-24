@@ -11,7 +11,7 @@ export default function UpcomingPrograms() {
     const fetchPrograms = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/fdp/upcoming/${facultyId}`
+          `https://fdpms-webservice.onrender.com/fdp/upcoming/${facultyId}`
         );
         if (res.data.success) {
           setPrograms(res.data.data);
@@ -26,7 +26,7 @@ export default function UpcomingPrograms() {
   const transferToParticipation = async (fdpId) => {
     try {
       const res = await axios.post(
-        `http://localhost:3000/transfer-to-participation/${fdpId}`
+        `https://fdpms-webservice.onrender.com/transfer-to-participation/${fdpId}`
       );
       if (res.data.success) {
         alert(`✅ ${res.data.message}`);

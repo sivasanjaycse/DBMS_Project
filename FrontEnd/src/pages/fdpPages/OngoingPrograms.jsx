@@ -11,7 +11,7 @@ const OngoingPrograms = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/fdp/ongoing/${facultyId}`)
+      .get(`https://fdpms-webservice.onrender.com/fdp/ongoing/${facultyId}`)
       .then((res) => {
         if (res.data.success) setOngoingFdps(res.data.data);
         else console.error("Failed to fetch ongoing FDPs");

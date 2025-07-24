@@ -11,7 +11,7 @@ const FdpList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/all-fdp")
+      .get("https://fdpms-webservice.onrender.com/all-fdp")
       .then((res) => {
         const today = new Date();
         const upcomingFdps = res.data.data.filter(

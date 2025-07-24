@@ -19,7 +19,7 @@ function UpdateFacultyDetails() {
 
   // Load existing details first
   useEffect(() => {
-    axios.get(`http://localhost:3000/faculty/${facultyId}`)
+    axios.get(`https://fdpms-webservice.onrender.com/faculty/${facultyId}`)
       .then((res) => {
         setFormData(res.data[0]);
       })
@@ -38,7 +38,7 @@ function UpdateFacultyDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/update-faculty", formData);
+      const res = await axios.post("https://fdpms-webservice.onrender.com/update-faculty", formData);
       if (res.data.success) {
         alert("Updated successfully!");
         navigate(`/dashboard/${facultyId}`);

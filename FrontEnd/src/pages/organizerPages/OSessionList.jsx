@@ -8,7 +8,7 @@ const OSessionList = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/fdp/${fdpId}/sessions`)
+      .get(`https://fdpms-webservice.onrender.com/fdp/${fdpId}/sessions`)
       .then((res) => {
         if (res.data.success) setSessions(res.data.sessions);
         else console.error("Error loading sessions");
@@ -22,7 +22,7 @@ const OSessionList = () => {
     if (!window.confirm("Are You Sure to Delete ?")) return;
 
     axios
-      .delete(`http://localhost:3000/organizer/session/delete/${sessionId}`)
+      .delete(`https://fdpms-webservice.onrender.com/organizer/session/delete/${sessionId}`)
       .then((res) => {
         if (res.data.success) {
           alert("Session deleted ✅");

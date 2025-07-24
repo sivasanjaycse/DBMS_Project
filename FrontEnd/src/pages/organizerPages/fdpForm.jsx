@@ -16,10 +16,10 @@ const FdpForm = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/departments").then((res) => {
+    axios.get("https://fdpms-webservice.onrender.com/departments").then((res) => {
       setDepartments(res.data.departments.map((d) => d.dname));
     });
-    axios.get("http://localhost:3000/colleges").then((res) => {
+    axios.get("https://fdpms-webservice.onrender.com/colleges").then((res) => {
       setColleges(res.data.colleges.map((c) => c.name));
     });
   }, []);
@@ -40,7 +40,7 @@ const FdpForm = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/organizer/insert", {
+      const res = await axios.post("https://fdpms-webservice.onrender.com/organizer/insert", {
         title,
         venue,
         startDate,

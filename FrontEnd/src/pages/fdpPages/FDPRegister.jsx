@@ -15,7 +15,7 @@ console.log('fdpId:', fdpId); // Should NOT be undefined!
   useEffect(() => {
     const fetchFdpDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/fdp/${fdpId}`);
+        const response = await axios.get(`https://fdpms-webservice.onrender.com/fdp/${fdpId}`);
         if (response.data.success) {
           setFdpDetails(response.data.data);
         } else {
@@ -38,7 +38,7 @@ console.log('fdpId:', fdpId); // Should NOT be undefined!
 
     try {
       const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-      const response = await axios.post('http://localhost:3000/register', {
+      const response = await axios.post('https://fdpms-webservice.onrender.com/register', {
         faculty_id: parseInt(facultyId),
         fdp_id: parseInt(fdpId),
         payment_status: 'success',

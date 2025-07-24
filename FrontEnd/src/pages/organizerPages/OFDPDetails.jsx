@@ -10,7 +10,7 @@ const OFDPDetails = () => {
   useEffect(() => {
     const fetchFdpDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/fdp/${fdpId}`);
+        const response = await axios.get(`https://fdpms-webservice.onrender.com/fdp/${fdpId}`);
         if (response.data.success) {
           setFdpDetails(response.data.data);
         } else {

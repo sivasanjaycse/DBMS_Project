@@ -12,7 +12,7 @@ export default function FundingDetails() {
     const fetchFunding = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/fdp/${fdpId}/funding`
+          `https://fdpms-webservice.onrender.com/api/fdp/${fdpId}/funding`
         );
         setFunding(res.data);
       } catch (err) {
@@ -25,7 +25,7 @@ export default function FundingDetails() {
 
   const handleDelete = async (fundingId) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/organizer/funding/delete/${fundingId}`);
+      const res = await axios.delete(`https://fdpms-webservice.onrender.com/organizer/funding/delete/${fundingId}`);
       alert(res.data.message);
       window.location.reload(); // Reload the page to reflect changes
     } catch (err) {

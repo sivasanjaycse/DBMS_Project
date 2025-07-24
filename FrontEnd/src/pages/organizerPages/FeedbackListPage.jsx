@@ -11,7 +11,7 @@ const FeedbackListPage = () => {
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/fdp/${fdpId}/feedback`);
+        const res = await axios.get(`https://fdpms-webservice.onrender.com/fdp/${fdpId}/feedback`);
         setFeedbackList(res.data.data);
       } catch (err) {
         console.error("Error fetching feedback:", err);
