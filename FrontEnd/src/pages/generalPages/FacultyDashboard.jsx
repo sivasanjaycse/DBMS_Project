@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import "./FacultyDashboard.css";
+import "./FacultyDashBoard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
