@@ -1,5 +1,5 @@
 // File: App.jsx
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "/src/pages/generalPages/LoginPage.jsx";
 import "./App.css";
 import Header from "./pages/generalPages/Header";
