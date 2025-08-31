@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // This allows your frontend to talk to the backend
+app.use(cors());
 app.get("/",(req,res)=>{
   res.send("HI WELCOME TO BACKEND!!!");
 });
